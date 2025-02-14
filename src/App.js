@@ -1,4 +1,4 @@
-import Student from "./components/Student"
+import Student from './components/Student'
 
 function App () {
   const students = [
@@ -19,14 +19,21 @@ function App () {
       age: 19,
       phone: 87656766553,
       course: 'Web Development'
-    },
+    }
   ]
   return (
     <div className='container'>
       {students.map((student, index) => {
-        return <Student key={index} name={student.name} phone={student.phone} age={student.age} course={student.course} />
+        return (
+          <Student
+            key={index}
+            name={student.name}
+            phone={student.phone}
+            age={student.age}
+            course={student.course}
+          />
+        )
       })}
-      {/* <Student name='Hashir' age='23' phone='7654578353' course='Ethical Hacking' /> */}
     </div>
   )
 }
