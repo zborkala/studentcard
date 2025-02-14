@@ -1,40 +1,36 @@
+import { useEffect, useState } from 'react'
 import Student from './components/Student'
 
 function App () {
-  const students = [
-    {
-      name: 'Hashir',
-      age: 23,
-      phone: 9876563865,
-      course: 'Ethical Hacking'
-    },
-    {
-      name: 'Ahmad',
-      age: 22,
-      phone: 56786567666,
-      course: 'Graphic Designing'
-    },
-    {
-      name: 'Muneer',
-      age: 19,
-      phone: 87656766553,
-      course: 'Web Development'
-    }
-  ]
+  const [name, setName] = useState("")
+  const [age, setAge] = useState("")
+  const [phone, setPhone] = useState("")
+  const [course, setCourse] = useState("")
+ 
   return (
+    <>
     <div className='container'>
-      {students.map((student, index) => {
-        return (
-          <Student
-            key={index}
-            name={student.name}
-            phone={student.phone}
-            age={student.age}
-            course={student.course}
-          />
-        )
-      })}
+      <Student name={name} age={age} phone={phone} course={course} />
     </div>
+      <div>
+        <div>
+          <label>Student Name: </label>
+          <input value={name} onChange={(e) => setName(e.target.value)} />
+        </div>
+        <div>
+          <label>Student Age: </label>
+          <input value={age} onChange={(e) => setAge(e.target.value)} />
+        </div>
+        <div>
+          <label>Student Phone: </label>
+          <input value={phone} onChange={(e) => setPhone(e.target.value)} />
+        </div>
+        <div>
+          <label>Course Name: </label>
+          <input value={course} onChange={(e) => setCourse(e.target.value)} />
+        </div>
+      </div>
+    </>
   )
 }
 
