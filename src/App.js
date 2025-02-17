@@ -110,7 +110,7 @@ function App () {
               setCourse('')
             }}
           >
-            Add Student
+            {currentIndex >= 0 ? "Edit Student" : "Add Student"}
           </button>
         </div>
       </div>
