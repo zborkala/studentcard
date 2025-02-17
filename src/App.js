@@ -3,10 +3,13 @@ import Student from './components/Student'
 
 function App () {
   const [currentIndex, setCurrentIndex] = useState(-1)
-  const [name, setName] = useState('')
-  const [age, setAge] = useState('')
-  const [phone, setPhone] = useState('')
-  const [course, setCourse] = useState('')
+  const initialData = {
+    name: '',
+    age: '',
+    phone: '',
+    course: ''
+  }
+  const [data, setData] = useState(initialData)
   const [students, setStudents] = useState([
     {
       name: 'Hamza',
@@ -43,10 +46,7 @@ function App () {
                 setStudents(students.filter((s, i) => i != index))
               }}
               onEdit={() => {
-                setName(student.name)
-                setAge(student.age)
-                setPhone(student.phone)
-                setCourse(student.course)
+                setData(student)
                 setCurrentIndex(index)
               }}
             />
@@ -56,19 +56,31 @@ function App () {
       <div>
         <div>
           <label>Student Name: </label>
-          <input value={name} onChange={e => setName(e.target.value)} />
+          <input
+            value={data.name}
+            onChange={e => setData({ ...data, name: e.target.value })}
+          />
         </div>
         <div>
           <label>Student Age: </label>
-          <input value={age} onChange={e => setAge(e.target.value)} />
+          <input
+            value={data.age}
+            onChange={e => setData({ ...data, age: e.target.value })}
+          />
         </div>
         <div>
           <label>Student Phone: </label>
-          <input value={phone} onChange={e => setPhone(e.target.value)} />
+          <input
+            value={data.phone}
+            onChange={e => setData({ ...data, phone: e.target.value })}
+          />
         </div>
         <div>
           <label>Course Name: </label>
-          <input value={course} onChange={e => setCourse(e.target.value)} />
+          <input
+            value={data.course}
+            onChange={e => setData({ ...data, course: e.target.value })}
+          />
         </div>
         <div>
           <button
@@ -78,12 +90,7 @@ function App () {
                 setStudents(
                   students.map((s, i) => {
                     if (i == currentIndex) {
-                      return {
-                        name: name,
-                        age: age,
-                        phone: phone,
-                        course: course
-                      }
+                      return data
                     } else {
                       return s
                     }
@@ -92,25 +99,13 @@ function App () {
                 setCurrentIndex(-1)
               } else {
                 // To add new student
-                setStudents([
-                  ...students,
-                  {
-                    name: name,
-                    age: age,
-                    phone: phone,
-                    course: course
-                  }
-                ])
+                setStudents([...students, data])
               }
 
-
-              setName('')
-              setAge('')
-              setPhone('')
-              setCourse('')
+              setData(initialData)
             }}
           >
-            {currentIndex >= 0 ? "Edit Student" : "Add Student"}
+            {currentIndex >= 0 ? 'Edit Student' : 'Add Student'}
           </button>
         </div>
       </div>
