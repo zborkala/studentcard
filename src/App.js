@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Student from './components/Student'
 
 function App () {
@@ -6,11 +6,38 @@ function App () {
   const [age, setAge] = useState("")
   const [phone, setPhone] = useState("")
   const [course, setCourse] = useState("")
+  const [students, setStudents] = useState([
+    {
+      name: 'Hamza',
+      age: 32,
+      phone: '988765555',
+      course: 'OMCE'
+    },
+    {
+      name: 'Ali',
+      age: 21,
+      phone: '678987678888',
+      course: 'Graphic Designing'
+    },
+    {
+      name: 'Fathima',
+      age: 19,
+      phone: '87663786363',
+      course: 'UI/UX'
+    },
+  ])
  
   return (
     <>
     <div className='container'>
-      <Student name={name} age={age} phone={phone} course={course} />
+      {
+        students.map((student, index) => {
+          return <Student key={index} name={student.name} age={student.age} phone={student.phone} course={student.course} onDelete={() => {
+            setStudents(students.filter((s, i) => i != index))
+          }} />
+          
+        })
+      }
     </div>
       <div>
         <div>
@@ -28,6 +55,25 @@ function App () {
         <div>
           <label>Course Name: </label>
           <input value={course} onChange={(e) => setCourse(e.target.value)} />
+        </div>
+        <div>
+          <button onClick={() => {
+            setStudents([
+              ...students,
+              {
+                name: name,
+                age: age,
+                phone: phone,
+                course: course
+              }
+            ])
+            setName("")
+            setAge("")
+            setPhone("")
+            setCourse("")
+          }}>
+            Add Student
+          </button>
         </div>
       </div>
     </>
