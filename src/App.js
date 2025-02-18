@@ -14,7 +14,7 @@ function App () {
     {
       name: 'Hamza',
       age: 32,
-      phone: '988765555',
+      phone: '888888888',
       course: 'OMCE'
     },
     {
